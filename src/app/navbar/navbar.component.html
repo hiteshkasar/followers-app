@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div [style.backgroundColor]="backgroundColor" class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li routerLinkActive="active current" class="nav-item">
+        <a class="nav-link" [routerLink]="['/followers', 1223]" [queryParams]="{page: 1, order: 'newest'}">Followers <span class="sr-only">(current)</span></a>
+      </li>
+      <li routerLinkActive="active current" class="nav-item">
+        <a class="nav-link" routerLink="/posts">Post</a>
+      </li>
+    </ul>
+  </div>
+</nav>

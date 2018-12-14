@@ -1,0 +1,124 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div class="form-group row">
+    <label class="col-2 col-form-label" for="firstName">First Name</label>
+    <div class="col-10">
+      <input 
+        required 
+        minlength="3" 
+        maxlength="10" 
+        pattern="hitesh" 
+        ngModel 
+        name="firstName" 
+        #firstName="ngModel" 
+        (change)="log(firstName)" 
+        id="firstName" 
+        type="text" 
+        class="form-control"
+      >
+      <div 
+        class="alert alert-danger" 
+        *ngIf="!firstName.valid && firstName.touched">
+        <div *ngIf="firstName.errors.required">
+          First Name is required
+        </div>
+        <div *ngIf="firstName.errors.minlength">
+          First Name should be minimum {{firstName.errors.minlength.requiredLength}} characters
+        </div>
+        <div *ngIf="firstName.errors.pattern">
+          First Name doesn't match the pattern
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="lastName" class="col-2 col-form-label">Last Name</label>
+    <div class="col-10" ngModelGroup="contact" #contact="ngModelGroup">
+      <input
+        required 
+        ngModel 
+        name="lastName" 
+        type="text" 
+        id="lastName" 
+        class="form-control"
+      >
+      <div *ngIf="!contact.valid && contact.touched" class="alert alert-danger">Last Name of ngModelGroup is required</div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label" for="comment">Comment</label>
+    <div class="col-10">
+      <textarea 
+        ngModel 
+        name="comment" 
+        id="comment" 
+        cols="30" 
+        rows="10" 
+        type="text" 
+        class="form-control">
+      </textarea>
+    </div>
+  </div>
+  <div class="form-group row form-check">
+    <label class="form-check-label">
+      <input 
+        type="checkbox" 
+        class="form-check-input"
+        ngModel
+        name="isSubscribed"
+      >Subscribe to mailing list
+    </label>
+  </div>
+  <div class="form-group row">
+    <label for="contactMethod" class="col-2 col-form-label">Contact Method</label>
+    <div class="col-10">
+      <select ngModel name="contactMethod" id="contactMethod" class="form-control custom-select">
+        <option value="">Please select...</option>
+        <option *ngFor="let method of contactMethods" [value]="method.id">{{method.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="contactMethodObject" class="col-2 col-form-label">Contact Method</label>
+    <div class="col-10">
+      <select multiple ngModel name="contactMethodObject" id="contactMethodObject" class="form-control custom-select">
+        <option value="">Please select...</option>
+        <option *ngFor="let method of contactMethods" [ngValue]="method">{{method.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row form-check">
+    <label class="form-check-label">
+      <input 
+        ngModel
+        name="contactMethodRadioHardcoded"
+        type="radio"
+        class="form-check-input"
+        value="1"
+      >Email
+    </label>
+  </div>
+  <div class="form-group row form-check">
+    <label class="form-check-label">
+      <input 
+        ngModel
+        name="contactMethodRadioHardcoded"
+        type="radio"
+        class="form-check-input"
+        value="2"
+      >Phone
+    </label>
+  </div>
+  <div *ngFor="let method of contactMethods" class="form-group row form-check">
+    <label class="form-check-label">
+      <input 
+        ngModel
+        name="contactMethodRadio"
+        type="radio"
+        class="form-check-input"
+        [value]="method.id"
+      >{{method.name}}
+    </label>
+  </div>
+  <p>{{f.value | json}}</p>
+  <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
