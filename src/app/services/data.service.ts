@@ -18,7 +18,7 @@ export class DataService {
   getAll() {
     return this.http.get(this.url).pipe(
       map(
-        data => data
+        data => {return data;}
       ),
       catchError(this.handleError)
     );
