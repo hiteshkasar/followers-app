@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  navBackgroundColor: 'blue'
+  navBackgroundColor: 'white'
 };
